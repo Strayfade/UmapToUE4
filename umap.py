@@ -10,7 +10,7 @@ from math import *
 import shutil
 
 # Change the value to the working directory of the Java program with the bat. I'm leaving mine here.
-data_dir = r"C:\Users\epicp\Downloads\BlenderUmap-0.2.1-Strayfade\BlenderUmap"
+data_dir = r"C:\Users\epicp\Downloads\UmapToUE4-0.9\UmapToUE4-0.9"
 
 clear_scene = True              # Deletes all objects from Blender Scene before starting an Import.
 reuse_meshes = True             # Checks to see if a mesh has already been used before, reuses it instead of importing it again.
@@ -25,7 +25,7 @@ default_ColorSpace = "sRGB"     # Uses default_ColorSpace instead of Linear for 
 
 # Strayfade Blender to UE4
 
-UseBlenderToUE4 = False
+UseBlenderToUE4 = True
 ExportPath = "C:\\Users\\epicp\Desktop\\"
 
 # These last settings can individually export .FBX meshes and/or textures alongside BlenderToUE4
@@ -183,7 +183,7 @@ def import_material(m_idx: int, path: str, suffix: str, base_textures: list, tex
             use_backface_culling = True
         else:
             m.blend_method = "OPAQUE"
-            m.use_backface_culling = False
+            m.use_backface_culling = True
 
         def group(sub_tex_idx, location):
             if UseBlenderToUE4:
@@ -193,6 +193,8 @@ def import_material(m_idx: int, path: str, suffix: str, base_textures: list, tex
             sh.location = location
             if not UseBlenderToUE4:
                 sh.node_tree = tex_shader
+            else:
+                sh.inputs[7].default_value = 0.69
             sub_textures = base_textures[sub_tex_idx] if sub_tex_idx < len(base_textures) and base_textures[sub_tex_idx] and len(base_textures[sub_tex_idx]) > 0 else base_textures[0]
 
             for tex_index, sub_tex in enumerate(sub_textures):
@@ -220,8 +222,10 @@ def import_material(m_idx: int, path: str, suffix: str, base_textures: list, tex
                                 tree.links.new(d_tex.outputs[0], sh.inputs[3])
                             elif texture_index is 1:
                                 tree.links.new(d_tex.outputs[0], sh.inputs[19])
+                                tree.links.new(d_tex.outputs[0], sh.inputs[20])
                             elif texture_index is 2:
                                 tree.links.new(d_tex.outputs[0], sh.inputs[5])
+                                tree.links.new(d_tex.outputs[0], sh.inputs[6])
                             
                         # Strayfade Blender to UE4 Texture Export
                         if EXPORT_TEXTURES:
