@@ -1,0 +1,16 @@
+{
+  "_Documentation": "https://github.com/Strayfade/.UmapToUE4/README.md",
+  "PaksDirectory": "C:\\Users\\epicp\\Downloads\\Modnite\\Modnite\\FortniteGame\\Content\\Paks",
+  "UEVersion": "GAME_UE4_22",
+  "EncryptionKeys": [
+	{
+	  "Guid": "00000000000000000000000000000000",
+	  "Key": "0xDA62D5DBF537499EF82351FC4751D2AFC82E35CAF19945BDD02E3C6BB9462491"
+	}
+  ],
+  "bReadMaterials": true,
+  "bRunUModel": true,
+  "UModelAdditionalArgs": "",
+  "bDumpAssets": false,
+  "ExportPackage": "/Game/Athena/Maps/POI/Athena_POI_Bridge_002.umap"
+}
